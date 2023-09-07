@@ -45,3 +45,7 @@ jobs:
       - name: Destroy Terraform Resources
         run: terraform destroy -auto-approve
         working-directory: terraform
+      
+      - name: Empty S3 Bucket
+        run: |
+          aws s3 rm s3://my-unique-bucket-name-333 --recursive
