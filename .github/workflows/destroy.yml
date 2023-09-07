@@ -39,7 +39,7 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Initialize Terraform
-        run: terraform init -backend-config="bucket=my-unique-bucket-name-333" -backend-config="key=my-unique-bucket-name-333" -backend-config="region=us-east-1"
+        run: terraform init -backend-config="bucket=my-unique-bucket-name-333" -backend-config="terraform.tfstate" -backend-config="region=us-east-1"
         working-directory: terraform
 
       - name: Destroy Terraform Resources
