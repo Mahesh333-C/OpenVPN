@@ -1,0 +1,45 @@
+name: AWS resourse Destroy
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm-destroy:
+        description: 'Confirm Destroy'
+        required: true
+        default: 'false'
+
+env:
+  AWS_REGION: "us-east-1"
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  DestroyInfrastructure:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Confirm Destroy
+        id: confirm_destroy
+        run: |
+          if [ "${{ github.event.inputs.confirm-destroy }}" != "true" ]; then
+            echo "Destroy not confirmed. Set 'confirm-destroy: true' to confirm."
+            exit 1
+          fi
+
+      - name: Git clone the repository
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::076112249276:role/GitRole
+          role-session-name: samplerolesession
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Destroy Terraform Resources
+        run: |
+          cd terraform
+          terraform init
+          terraform destroy -auto-approve
