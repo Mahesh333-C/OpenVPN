@@ -40,10 +40,13 @@ jobs:
 
       - name: Download Terraform State
         run: |
-          aws s3 cp s3://my-unique-bucket-name-333/terraform.tfstate .
+          aws s3 cp s3://my-unique-bucket-name-333/terraform.tfstate terraform/
+        working-directory: terraform
 
       - name: Initialize Terraform
         run: terraform init
+        working-directory: terraform
 
       - name: Destroy Terraform Resources
         run: terraform destroy -auto-approve
+        working-directory: terraform
