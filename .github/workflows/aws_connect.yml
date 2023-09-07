@@ -23,7 +23,11 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Apply Terraform
-        run: terraform init -backend-config="bucket=my-unique-bucket-name-333" -backend-config="terraform.tfstate" -backend-config="region=us-east-1" && terraform apply -auto-approve
+        run: terraform init && terraform apply -auto-approve
+        working-directory: terraform
+
+      - name: Apply Terraform state backup
+        run: terraform init -backend-config="bucket=my-unique-bucket-name-333" -backend-config="key=terraform.tfstate" -backend-config="region=us-east-1"
         working-directory: terraform
       
       # - name: Upload Terraform State
