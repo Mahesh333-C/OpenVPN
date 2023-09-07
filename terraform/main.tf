@@ -10,6 +10,16 @@ resource "aws_s3_bucket" "my_bucket" {
   acl    = "private"
 }
 
+terraform {
+  backend "s3" {
+    bucket         = "my-unique-bucket-name-333"
+    key            = "terraform.tfstate"
+    region         = "us-east-1"
+    encrypt        = true
+  }
+}
+
 output "bucket_name" {
   value = aws_s3_bucket.my_bucket.id
 }
+
