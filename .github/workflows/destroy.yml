@@ -38,8 +38,12 @@ jobs:
           role-session-name: samplerolesession
           aws-region: ${{ env.AWS_REGION }}
 
-      - name: Destroy Terraform Resources
+      - name: Download Terraform State
         run: |
-          cd terraform
-          terraform init
-          terraform destroy -auto-approve
+          aws s3 cp s3://my-unique-bucket-name/terraform.tfstate .
+
+      - name: Initialize Terraform
+        run: terraform init
+
+      - name: Destroy Terraform Resources
+        run: terraform destroy -auto-approve
