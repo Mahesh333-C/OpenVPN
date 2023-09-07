@@ -38,13 +38,8 @@ jobs:
           role-session-name: samplerolesession
           aws-region: ${{ env.AWS_REGION }}
 
-      - name: Download Terraform State
-        run: |
-          aws s3 cp s3://my-unique-bucket-name-333/terraform.tfstate terraform/
-        working-directory: terraform
-
       - name: Initialize Terraform
-        run: terraform init
+        run: terraform init -backend-config="bucket=my-unique-bucket-name-333" -backend-config="key=my-unique-bucket-name-333" -backend-config="region=us-east-1"
         working-directory: terraform
 
       - name: Destroy Terraform Resources

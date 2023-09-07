@@ -1,3 +1,9 @@
+terraform {
+  backend "s3" {
+  encrypt = true
+  }
+}
+
 resource "aws_vpc" "new_VPC" {
   cidr_block = "10.0.0.0/16"
   tags = {
