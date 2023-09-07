@@ -32,4 +32,4 @@ jobs:
 
       - name: Upload Terraform State
         run: |
-          aws s3 cp terraform.tfstate s3://my-unique-bucket-name-333/
+          aws s3 cp terraform/terraform.tfstate s3://my-unique-bucket-name-333/
