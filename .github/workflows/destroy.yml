@@ -40,7 +40,7 @@ jobs:
 
       - name: Download Terraform State
         run: |
-          aws s3 cp s3://my-unique-bucket-name/terraform.tfstate .
+          aws s3 cp s3://my-unique-bucket-name-333/terraform.tfstate .
 
       - name: Initialize Terraform
         run: terraform init
