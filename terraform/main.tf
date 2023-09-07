@@ -5,10 +5,10 @@ resource "aws_vpc" "new_VPC" {
   }
 }
 
-resource "aws_s3_bucket" "my_bucket" {
-  bucket = "my-unique-bucket-name-333"
-  acl    = "private"
-}
+# resource "aws_s3_bucket" "my_bucket" {
+#   bucket = "my-unique-bucket-name-333"
+#   acl    = "private"
+# }
 
 terraform {
   backend "s3" {
@@ -19,7 +19,7 @@ terraform {
   }
 }
 
-output "bucket_name" {
-  value = aws_s3_bucket.my_bucket.id
-}
+# output "bucket_name" {
+#   value = aws_s3_bucket.my_bucket.id
+# }
 
