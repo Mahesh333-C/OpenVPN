@@ -185,22 +185,6 @@ resource "aws_instance" "private_instance" {
   }
 }
 
-resource "null_resource" "client_ovpn" {
-  triggers = {
-    instance_id = aws_instance.public_instance.id
-  }
-
-  provisioner "local-exec" {
-    command = <<-EOT
-      cat /path/to/client.ovpn > client.ovpn
-    EOT
-  }
-}
-
-output "client_ovpn_content" {
-  value = file("client.ovpn")
-}
-
 output "public_instance_ip" {
   description = "Public IP address of the EC2 instance in the public subnet."
   value       = aws_instance.public_instance.public_ip
