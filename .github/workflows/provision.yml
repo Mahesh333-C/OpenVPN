@@ -1,8 +1,6 @@
-name: AWS Connect
+name: AWS Connect and provition resourses
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 env:
   AWS_REGION : "us-east-1"   
 permissions:
@@ -26,7 +24,7 @@ jobs:
         run: terraform init && terraform apply -auto-approve
         working-directory: terraform
 
-      - name: Debug
+      - name: view current working directory
         run: |
           pwd
           ls -la
