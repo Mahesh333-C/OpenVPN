@@ -196,6 +196,7 @@ output "private_instance_ip" {
 }
 
 output "my_key_pair" {
+  sensitive = true
   description = "keypair for instances"
   value       = tls_private_key.key_pair.private_key_pem
 }
