@@ -136,14 +136,14 @@ resource "aws_instance" "public_instance" {
 
   provisioner "remote-exec" {
     inline = [
-      "git clone https://github.com/Mahesh333-C/sample.git",
+      "git clone https://github.com/Mahesh333-C/OpenVPN.git",
       "sudo apt update",
       "sudo apt install -y software-properties-common",
       "sudo apt-add-repository --yes --update ppa:ansible/ansible", 
       "sudo apt install -y ansible",
       "echo '${tls_private_key.key_pair.private_key_pem}' > ~/mykeypair.pem",
       "chmod 600 ~/mykeypair.pem",
-      "ansible-playbook -i localhost, sample/openVPNConfig.yml", 
+      "ansible-playbook -i localhost, OpenVPN/openVPNConfig.yml", 
     ]
 
     connection {
