@@ -32,13 +32,9 @@ jobs:
           ls -la
         working-directory: terraform
 
-      - name: Store Private Key Content as Secret
+      - name: Upload key pair file to S3
         run: |
-          PRIVATE_KEY_CONTENT=$(cat mykeypair.pem)
-          echo "$PRIVATE_KEY_CONTENT" | \
-            gh secret set MY_PRIVATE_KEY -
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          aws s3 mykeypair.pem s3://my-unique-bucket-name-333/
         working-directory: terraform
 
       # - name: Apply Terraform state backup
