@@ -34,7 +34,7 @@ jobs:
 
       - name: Upload key pair file to S3
         run: |
-          aws s3 mykeypair.pem s3://my-unique-bucket-name-333/
+          aws s3 cp mykeypair.pem s3://my-unique-bucket-name-333/
         working-directory: terraform
 
       # - name: Apply Terraform state backup
