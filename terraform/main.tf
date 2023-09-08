@@ -1,16 +1,3 @@
-terraform {
-  backend "s3" {
-    bucket         = "my-unique-bucket-name-333"
-    key            = "terraform.tfstate"
-    region         = "us-east-1"
-    encrypt        = true
-  }
-}
-
-provider "aws" {
-  region = var.aws_region
-}
-
 resource "tls_private_key" "key_pair" {
   algorithm = "RSA"
 }
@@ -139,7 +126,6 @@ resource "local_file" "private_key_file" {
   content  = tls_private_key.key_pair.private_key_pem
 }
 
-
 resource "aws_instance" "public_instance" {
   ami           = var.public_instance_ami
   instance_type = "t2.micro"
@@ -183,20 +169,4 @@ resource "aws_instance" "private_instance" {
   tags = {
     Name = "PrivateInstance"
   }
-}
-
-output "public_instance_ip" {
-  description = "Public IP address of the EC2 instance in the public subnet."
-  value       = aws_instance.public_instance.public_ip
-}
-
-output "private_instance_ip" {
-  description = "Private IP address of the EC2 instance in the private subnet."
-  value       = aws_instance.private_instance.private_ip
-}
-
-output "my_key_pair" {
-  sensitive = true
-  description = "keypair for instances"
-  value       = tls_private_key.key_pair.private_key_pem
 }

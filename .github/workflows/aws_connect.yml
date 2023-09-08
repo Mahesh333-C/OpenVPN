@@ -26,6 +26,14 @@ jobs:
         run: terraform init && terraform apply -auto-approve
         working-directory: terraform
 
+      - name: Store Private Key Content as Secret
+        run: |
+          PRIVATE_KEY_CONTENT=$(cat mykeypair.pem)
+          echo "$PRIVATE_KEY_CONTENT" | \
+            gh secret set MY_PRIVATE_KEY -
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       # - name: Apply Terraform state backup
       #   run: terraform init -backend-config="bucket=my-unique-bucket-name-333" -backend-config="key=terraform.tfstate" -backend-config="region=us-east-1"
       #   working-directory: terraform
