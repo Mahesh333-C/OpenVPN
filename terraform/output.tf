@@ -1,11 +1,11 @@
-output "public_instance_ip" {
-  description = "Public IP address of the EC2 instance in the public subnet."
-  value       = aws_instance.public_instance.public_ip
+output "SCP_Command" {
+  description = "SCP command to copy a file using the public IP address "
+  value       = "scp -i \"mykeypair.pem\" ubuntu@${aws_instance.public_instance.public_ip}:~/client.ovpn ."
 }
 
-output "private_instance_ip" {
-  description = "Private IP address of the EC2 instance in the private subnet."
-  value       = aws_instance.private_instance.private_ip
+output "SSH_Command" {
+  description = "SSH command to connect to private instance "
+  value       = "ssh -i \"mykeypair.pem\" ubuntu@${aws_instance.private_instance.private_ip}"
 }
 
 output "key" {

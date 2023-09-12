@@ -34,12 +34,12 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          role-to-assume: arn:aws:iam::076112249276:role/GitRole
+          role-to-assume: arn:aws:iam::419707294796:role/GitRole
           role-session-name: samplerolesession
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Initialize Terraform
-        run: terraform init -backend-config="bucket=my-unique-bucket-name-333" -backend-config="key=terraform.tfstate" -backend-config="region=us-east-1"
+        run: terraform init -backend-config="bucket=my-unique-bucket-333" -backend-config="key=terraform.tfstate" -backend-config="region=us-east-1"
         working-directory: terraform
 
       - name: Destroy Terraform Resources
@@ -48,4 +48,4 @@ jobs:
       
       - name: Empty S3 Bucket objects
         run: |
-          aws s3 rm s3://my-unique-bucket-name-333 --recursive
+          aws s3 rm s3://my-unique-bucket-333 --recursive

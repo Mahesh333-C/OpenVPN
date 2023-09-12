@@ -16,7 +16,7 @@ jobs:
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          role-to-assume: arn:aws:iam::076112249276:role/GitRole
+          role-to-assume: arn:aws:iam::419707294796:role/GitRole
           role-session-name: samplerolesession
           aws-region: ${{ env.AWS_REGION }}
 
@@ -32,16 +32,16 @@ jobs:
 
       - name: Upload key pair file to S3
         run: |
-          aws s3 cp mykeypair.pem s3://my-unique-bucket-name-333/
+          aws s3 cp mykeypair.pem s3://my-unique-bucket-333/
         working-directory: terraform
 
       # - name: Apply Terraform state backup
-      #   run: terraform init -backend-config="bucket=my-unique-bucket-name-333" -backend-config="key=terraform.tfstate" -backend-config="region=us-east-1"
+      #   run: terraform init -backend-config="bucket=my-unique-bucket-333" -backend-config="key=terraform.tfstate" -backend-config="region=us-east-1"
       #   working-directory: terraform
       
       # - name: Upload Terraform State
       #   run: |
-      #     aws s3 cp terraform/terraform.tfstate s3://my-unique-bucket-name-333/
+      #     aws s3 cp terraform/terraform.tfstate s3://my-unique-bucket-333/
 
       # - name: Extract Bucket Name
       #   id: extract_bucket_name
